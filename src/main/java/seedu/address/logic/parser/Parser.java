@@ -30,10 +30,14 @@ public class Parser {
             Pattern.compile("(?<name>[^/]+)"
                     + " s/(?<start>[^/]+)"
                     + " e/(?<end>[^/]+)"
+                    + " p/(?<priority>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
     
-    private static final Pattern FLOATING_TASK_ARGS_FORMAT = Pattern.compile("(?<name>.+)" + "(?<tagArguments>(?: t/[^/]+)*)");
-
+    private static final Pattern FLOATING_TASK_ARGS_FORMAT = Pattern.compile(
+    		"(?<name>[^/]+)"
+    	   + " p/(?<priority>[^/]+)"
+    	   + "(?<tagArguments>(?: t/[^/]+)*)");
+    
     public Parser() {}
 
     /**
@@ -90,30 +94,37 @@ public class Parser {
     private Command prepareAdd(String args){
         final Matcher taskMatcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
         final Matcher floatingMatcher = FLOATING_TASK_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
+        
         if (!taskMatcher.matches() && !floatingMatcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        } else if (taskMatcher.matches()){
-            try {
-                return new AddCommand(
-                        taskMatcher.group("name"),
-                        taskMatcher.group("start"),
-                        taskMatcher.group("end"),
-                        getTagsFromArgs(taskMatcher.group("tagArguments"))
-                );
-            } catch (IllegalValueException ive) {
-                return new IncorrectCommand(ive.getMessage());
-            }
-        } else {
+      	return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        } 
+        
+         if(floatingMatcher.matches()){
         	try {
                 return new AddCommand(
                         floatingMatcher.group("name"),
+                        floatingMatcher.group("priority"),
                         getTagsFromArgs(floatingMatcher.group("tagArguments"))
                 );
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
         }
+        
+        else {
+            try {
+                return new AddCommand(
+                        taskMatcher.group("name"),
+                        taskMatcher.group("start"),
+                        taskMatcher.group("end"),
+                        taskMatcher.group("priority"),
+                        getTagsFromArgs(taskMatcher.group("tagArguments"))
+                );
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
+        } 
+         
     }
 
     /**
