@@ -9,7 +9,7 @@ import seedu.tasklist.commons.exceptions.IllegalValueException;
 public class EndDate {
 
 	    public static final String MESSAGE_ENDDATE_CONSTRAINTS = "Please enter a valid date in this format: dd/mm/yyyy!";
-	    public static final String ENDDATE_VALIDATION_REGEX = "([0-3][0-9]{1}+)(/|-| )([0-1][0-9]{1}+)(/|-| )([1-2][0-9][0-9][0-9]{1}+)";
+	    public static final String ENDDATE_VALIDATION_REGEX = "([0-3][0-9]{1}+)(/|-|)([0-1][0-9]{1}+)(/|-|)([1-2][0-9][0-9][0-9]{1}+)";
 
 	    public final Calendar cal2;
 
