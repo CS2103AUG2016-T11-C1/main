@@ -11,7 +11,7 @@ public class EndTime {
 
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = ".+";
+    public static final String EMAIL_VALIDATION_REGEX = "(([0])?[0-9]{1}+(pm|am))|([1])([0-2]){1}+(pm|am)|([0-1][0-9]:[0-5][0-9])|([2][0-3]:[0-5][0-9])";
 
     public final String value;
 
