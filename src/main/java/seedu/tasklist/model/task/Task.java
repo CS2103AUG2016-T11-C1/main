@@ -9,14 +9,17 @@ import seedu.tasklist.model.tag.UniqueTagList;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask{
 
 	private static int currentID = 0;
 	
     private TaskDetails name;
     private StartTime startTime;
+    private StartDate startDate;
     private EndTime endTime;
+    private EndDate endDate;
     private Priority priority;
+    private DateTime dateTime;
     private int uniqueID;
     private boolean isComplete;
 
@@ -25,12 +28,15 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskDetails name, StartTime startTime, EndTime endTime, Priority priority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, startTime, endTime, priority, tags);
+    public Task(TaskDetails name, StartTime startTime, StartDate startDate, EndTime endTime, EndDate endDate, Priority priority, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, startTime, startDate, endTime, endDate, priority, tags);
         this.name = name;
         this.startTime = startTime;
+        this.startDate = startDate;
         this.endTime = endTime;
+        this.endDate = endDate;
         this.priority = priority;
+        dateTime = new DateTime(startTime, startDate, endTime, endDate);
         this.uniqueID = currentID++;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isComplete = false;
@@ -40,7 +46,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getPriority(), source.getTags());
+        this(source.getName(), source.getStartTime(), source.getStartDate(), source.getEndTime(), source.getEndDate(), source.getPriority(), source.getTags());
     }
 
     @Override
@@ -52,10 +58,20 @@ public class Task implements ReadOnlyTask {
     public StartTime getStartTime() {
         return startTime;
     }
-
+    
+    @Override
+    public StartDate getStartDate(){
+    	return startDate;
+    }
+    
     @Override
     public EndTime getEndTime() {
         return endTime;
+    }
+    
+    @Override
+    public EndDate getEndDate(){
+    	return endDate;
     }
 
     @Override
@@ -75,6 +91,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
+    }
+    
+    @Override
+    public DateTime getDateTime() {
+        return dateTime;
     }
 
     /**

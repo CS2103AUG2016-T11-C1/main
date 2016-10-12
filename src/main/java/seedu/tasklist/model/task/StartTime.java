@@ -4,15 +4,16 @@ import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-public class StartTime {
+public class StartTime implements Time{
 
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "(([0])?[0-9]{1}+(pm|am))|([1])([0-2]){1}+(pm|am)|([0-1][0-9]:[0-5][0-9])|([2][0-3]:[0-5][0-9])";
+    public static final String PHONE_VALIDATION_REGEX = "(([0])?[0-9]{1}+(pm|am))|([1])([0-1]){1}+(pm|am)|([0-1][0-9]:[0-5][0-9])|([2][0-3]:[0-5][0-9])";
 
     public final String value;
-
+  
+  
     /**
      * Validates given phone number.
      *
@@ -20,8 +21,7 @@ public class StartTime {
      */
     public StartTime(String phone) throws IllegalValueException {
      //  assert phone != null;
-    	if(phone==null)
-        if (!isValidPhone(phone)) {
+        if (phone==null||!isValidTime(phone)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
 
@@ -31,7 +31,7 @@ public class StartTime {
     /**
      * Returns true if a given string is a valid person phone number.
      */
-    public static boolean isValidPhone(String test) {
+    public boolean isValidTime(String test) {
     	if(test==null){
     		return true;
     	}

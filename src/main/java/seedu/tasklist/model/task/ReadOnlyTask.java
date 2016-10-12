@@ -10,8 +10,11 @@ public interface ReadOnlyTask {
 
     TaskDetails getName();
     StartTime getStartTime();
+    StartDate getStartDate();
     EndTime getEndTime();
+    EndDate getEndDate();
     Priority getPriority();
+    DateTime getDateTime();
     int getUniqueID();
     boolean isComplete();
 
@@ -29,6 +32,8 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getStartTime().equals(this.getStartTime())
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate())
                 && other.getEndTime().equals(this.getEndTime())
                 && other.getPriority().equals(this.getPriority())
                 && (other.getUniqueID()==this.getUniqueID()));
@@ -42,8 +47,12 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Start time: ")
                 .append(getStartTime())
+                .append(" Start Date: ")
+                .append(getStartDate())
                 .append(" End time: ")
                 .append(getEndTime())
+                .append(" End Date: ")
+                .append(getEndDate())
                 .append(" Priority: ")
                 .append(getPriority());
         return builder.toString();

@@ -5,15 +5,15 @@ import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-public class EndTime {
+public class EndTime implements Time{
 
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "(([0])?[0-9]{1}+(pm|am))|([1])([0-2]){1}+(pm|am)|([0-1][0-9]:[0-5][0-9])|([2][0-3]:[0-5][0-9])";
+    public static final String EMAIL_VALIDATION_REGEX = "([0])?[0-9]{1}+(pm|am)|([1])([0-1]){1}+(pm|am)|([0-1][0-9]:[0-5][0-9])|([2][0-3]:[0-5][0-9])";
 
-    public final String value;
+    public String value = "haha";
 
     /**
      * Validates given email.
@@ -22,8 +22,7 @@ public class EndTime {
      */
     public EndTime(String email) throws IllegalValueException {
         //assert email != null;
-    	if(email==null)
-        if (!isValidEmail(email)) {
+        if (email==null||!isValidTime(email)) {
             throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
         }
 
@@ -33,7 +32,7 @@ public class EndTime {
     /**
      * Returns if a given string is a valid person email.
      */
-    public static boolean isValidEmail(String test) {
+    public boolean isValidTime(String test) {
     	if(test==null){
     		return true;
     	}

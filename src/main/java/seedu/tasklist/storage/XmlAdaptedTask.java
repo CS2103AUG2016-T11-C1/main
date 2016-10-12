@@ -20,7 +20,11 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String startTime;
     @XmlElement(required = true)
+    private String startDate;
+    @XmlElement(required = true)
     private String endTime;
+    @XmlElement(required = true)
+    private String endDate;
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
@@ -43,7 +47,9 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().taskDetails;
         startTime = source.getStartTime().value;
+        startDate = source.getStartDate().value;
         endTime = source.getEndTime().value;
+        endDate = source.getEndDate().value;
         priority = source.getPriority().priorityLevel;
         uniqueID = source.getUniqueID();
         tagged = new ArrayList<>();
@@ -64,10 +70,12 @@ public class XmlAdaptedTask {
         }
         final TaskDetails name = new TaskDetails(this.name);
         final StartTime startTime = new StartTime(this.startTime);
+        final StartDate startDate = new StartDate(this.startDate);
         final EndTime endTime = new EndTime(this.endTime);
+        final EndDate endDate = new EndDate(this.endDate);
         final Priority priority = new Priority(this.priority);
         final int uniqueID = this.uniqueID;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startTime, endTime, priority, tags);
+        return new Task(name, startTime, startDate, endTime, endDate, priority, tags);
     }
 }

@@ -3,6 +3,7 @@ package seedu.tasklist.model.task;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tasklist.commons.exceptions.DuplicateDataException;
+import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.commons.util.CollectionUtil;
 
 import java.util.*;
@@ -16,7 +17,8 @@ import java.util.*;
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task> {
-
+	
+	final Set<Calendar> calSet = new HashSet<Calendar>();
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -57,6 +59,11 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
+        try{
+        checkClashingTime(toAdd);
+        }  catch(IllegalValueException expObj){
+        	System.out.println(expObj.getMessage());
+        }
         internalList.add(toAdd);
     }
     
@@ -92,6 +99,18 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         throw new PersonNotFoundException();
     }
+    
+    public boolean checkClashingTime(Task toAdd) throws IllegalValueException{
+    	boolean added = false;
+    	if(toAdd!=null){
+    		 added = calSet.add(toAdd.getDateTime().getBeginCal());
+    	}
+			if (!added) {
+			    IllegalValueException ive = new IllegalValueException("Time and Dates are clashing! Please reschedule.");
+			    throw ive;
+			}
+			return true;
+		}
 
     public ObservableList<Task> getInternalList() {
         return internalList;

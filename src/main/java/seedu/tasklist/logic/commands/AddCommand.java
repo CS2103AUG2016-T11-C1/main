@@ -30,17 +30,17 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String startTime, String endTime, String priority, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, String startTime, String startDate, String endTime, String endDate, String priority, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
                 new TaskDetails(name),
-//              new StartDate(startDate),
                 new StartTime(startTime),
-//              new EndDate(endDate),
+                new StartDate(startDate),
                 new EndTime(endTime),
+                new EndDate(endDate),
                 new Priority(priority),
                 new UniqueTagList(tagSet)
         );
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String name, String priority, Set<String> tags) throws IllegalValueException {
-        this(name, "", "", priority ,tags);
+        this(name, "", "", "", "", priority ,tags);
     }
 
     @Override

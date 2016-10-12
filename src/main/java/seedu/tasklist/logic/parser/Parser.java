@@ -1,8 +1,7 @@
 package seedu.tasklist.logic.parser;
-
+import org.ocpsoft.prettytime.nlp.*;
 import static seedu.tasklist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tasklist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -110,25 +109,28 @@ public class Parser {
         else {
         	String starttime = (taskMatcher.group("start")==null)?"":taskMatcher.group("start");
         	String endtime = (taskMatcher.group("end")==null)?"":taskMatcher.group("end");
-        	String [] startTimeDate = new String[2];
-        	String [] endTimeDate = new String[2];
+        	String[] startTimeDate = new String[2];
+        	String[] endTimeDate = new String[2];
         	startTimeDate = starttime.split(" ");
-        	endTimeDate = endtime.split(" ");
-        	String finalEndDate = endTimeDate[0];
-        	String finalEndTime = endTimeDate[1];
-        	String finalStartDate = startTimeDate[0];
-        	String finalStartTime = startTimeDate[1];
+        	endTimeDate = endtime.split(" ");      	
+        	String finalStartDate = startTimeDate[1];
+        	String finalEndDate = endTimeDate[1];
+        	String finalEndTime = endTimeDate[0];
+        	String finalStartTime = startTimeDate[0];
+        	
         	
             try {
+            	 System.out.println("StartDate: "+finalStartDate+" Start time: "+finalStartTime+" End Date: "+finalEndDate+" End Time: "+finalEndTime);
                 return new AddCommand(
                         taskMatcher.group("name").replace("\\", ""),
                         finalStartTime,
-                        //finalStartDate,
+                        finalStartDate,
                         finalEndTime,
-                        //finalEndDate,
+                        finalEndDate,
                         taskMatcher.group("priority"),
                         getTagsFromArgs(taskMatcher.group("tagArguments"))
                 );
+            	
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
