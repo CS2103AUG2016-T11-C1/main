@@ -3,7 +3,7 @@ package seedu.tasklist.logic.commands;
 import seedu.tasklist.model.TaskList;
 
 /**
- * Clears the address book.
+ * Clears the to-do list.
  */
 public class ClearCommand extends Command {
 

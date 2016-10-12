@@ -3,7 +3,7 @@ package seedu.tasklist.model.task;
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book. Guarantees: immutable; is
+ * Represents a task's priority in the to-do list. Guarantees: immutable; is
  * valid as declared in {@link #isValidName(String)}
  */
 public class Priority {

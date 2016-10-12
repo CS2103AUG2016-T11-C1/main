@@ -52,7 +52,7 @@ public class UpdateCommand extends Command {
     public CommandResult execute() {
         UnmodifiableObservableList<Task> lastShownList = model.getModifiableTaskList();
         if (targetIndex >= lastShownList.size()) {
-            return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         } else {
             Task taskToUpdate = lastShownList.get(targetIndex);
 /*

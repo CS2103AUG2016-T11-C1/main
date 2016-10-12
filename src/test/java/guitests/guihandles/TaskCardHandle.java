@@ -6,9 +6,9 @@ import javafx.stage.Stage;
 import seedu.tasklist.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#priority";
     private static final String PHONE_FIELD_ID = "#startTime";
@@ -16,7 +16,7 @@ public class PersonCardHandle extends GuiHandle {
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node){
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node){
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -41,15 +41,15 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
-    public boolean isSamePerson(ReadOnlyTask person){
-        return getFullName().equals(person.getTaskDetails().taskDetails) && getPhone().equals("Starts:   "+person.getStartTime().value)
-                && getEmail().equals("Ends:     "+person.getEndTime().value) && getAddress().equals("Priority: "+person.getPriority().priorityLevel);
+    public boolean isSameTask(ReadOnlyTask task){
+        return getFullName().equals(task.getTaskDetails().taskDetails) && getPhone().equals("Starts:   "+task.getStartTime().value)
+                && getEmail().equals("Ends:     "+task.getEndTime().value) && getAddress().equals("Priority: "+task.getPriority().priorityLevel);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
+        if(obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getAddress().equals(handle.getAddress()); //TODO: compare the rest
         }

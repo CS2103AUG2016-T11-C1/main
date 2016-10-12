@@ -67,12 +67,12 @@ public class TaskList implements ReadOnlyTaskList {
         resetData(newData.getTaskList(), newData.getTagList());
     }
 
-//// person-level operations
+//// task-level operations
 
     /**
      * Adds a task to the to-do list.
      *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncTagsWithMasterList(p);
@@ -80,13 +80,13 @@ public class TaskList implements ReadOnlyTaskList {
     }
 
     /**
-     * Ensures that every tag in this person:
+     * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
     private void syncTagsWithMasterList(Task task) {
-        final UniqueTagList personTags = task.getTags();
-        tags.mergeFrom(personTags);
+        final UniqueTagList taskTags = task.getTags();
+        tags.mergeFrom(taskTags);
 
         // Create map with values = tag object references in the master list
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
@@ -94,9 +94,9 @@ public class TaskList implements ReadOnlyTaskList {
             masterTagObjects.put(tag, tag);
         }
 
-        // Rebuild the list of person tags using references from the master list
+        // Rebuild the list of task tags using references from the master list
         final Set<Tag> commonTagReferences = new HashSet<>();
-        for (Tag tag : personTags) {
+        for (Tag tag : taskTags) {
             commonTagReferences.add(masterTagObjects.get(tag));
         }
         task.setTags(new UniqueTagList(commonTagReferences));

@@ -10,12 +10,12 @@ public class ClearCommandTest extends TaskListGuiTest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.task8.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.task8));
+        assertTrue(taskListPanel.isListMatching(td.task8));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
@@ -26,6 +26,6 @@ public class ClearCommandTest extends TaskListGuiTest {
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+        assertResultMessage("Your to-do list has been cleared!");
     }
 }

@@ -9,7 +9,7 @@ import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Deletes a person identified using it's last displayed index from the address
+ * Deletes a task identified using it's last displayed index from the address
  * book.
  */
 public class DeleteCommand extends Command {
@@ -88,7 +88,7 @@ public class DeleteCommand extends Command {
     private CommandResult deleteUsingIndex(){
     	UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
     	if(targetIndex >= lastShownList.size()){
-    		return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    		return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     	}
     	else{
     		ReadOnlyTask taskToDelete = lastShownList.get(targetIndex);

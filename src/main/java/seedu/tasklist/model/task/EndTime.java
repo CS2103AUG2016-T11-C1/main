@@ -4,7 +4,7 @@ package seedu.tasklist.model.task;
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a task's end time in the to-do list.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
@@ -30,7 +30,7 @@ public class EndTime {
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns true if a given string is a valid end time.
      */
     public static boolean isValidEndTime(String test) {
     	if(test==null){

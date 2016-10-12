@@ -4,34 +4,34 @@ package seedu.tasklist.model.task;
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a task's Unique ID in the to-do list.
+ * Guarantees: immutable; is valid as declared in {@link #isValidUniqueID(String)}
  */
 public class UniqueID {
     
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
-    public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String MESSAGE_UNIQUE_ID_CONSTRAINTS = "Unique ID must be an integer.";
+    public static final String UNIQUE_ID_VALIDATION_REGEX = ".+";
 
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given Unique ID.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given Unique ID is invalid.
      */
-    public UniqueID(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidAddress(address)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+    public UniqueID(String uniqueID) throws IllegalValueException {
+        assert uniqueID != null;
+        if (!isValidUniqueID(uniqueID)) {
+            throw new IllegalValueException(MESSAGE_UNIQUE_ID_CONSTRAINTS);
         }
-        this.value = address;
+        this.value = uniqueID;
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid Unique ID.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    public static boolean isValidUniqueID(String test) {
+        return test.matches(UNIQUE_ID_VALIDATION_REGEX);
     }
 
     @Override

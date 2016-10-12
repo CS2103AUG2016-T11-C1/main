@@ -9,7 +9,7 @@ import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.*;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the to-do list.
  */
 public class AddCommand extends Command {
 

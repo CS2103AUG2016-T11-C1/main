@@ -89,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskListChanged();
     }
 
-    //=========== Filtered Person List Accessors ===============================================================
+    //=========== Filtered Task List Accessors ===============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -136,7 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask person);
+        boolean satisfies(ReadOnlyTask task);
         String toString();
     }
 
@@ -149,8 +149,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -160,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask person);
+        boolean run(ReadOnlyTask task);
         String toString();
     }
     
@@ -171,8 +171,8 @@ public class ModelManager extends ComponentManager implements Model {
     	}
     	
 		@Override
-		public boolean run(ReadOnlyTask person) {
-			return !person.isComplete();
+		public boolean run(ReadOnlyTask task) {
+			return !task.isComplete();
 		}
     }
 
@@ -203,13 +203,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
         
         @Override
-        public boolean run(ReadOnlyTask person) {
+        public boolean run(ReadOnlyTask task) {
 //            return nameKeyWords.stream()
-//                    .filter(keyword -> StringUtil.containsIgnoreCase(person.getName().fullName, keyword))
+//                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
 //                    .findAny()
 //                    .isPresent();
-        	Matcher matcher = NAME_QUERY.matcher(person.getTaskDetails().taskDetails);
-        	return matcher.matches() && !person.isComplete();
+        	Matcher matcher = NAME_QUERY.matcher(task.getTaskDetails().taskDetails);
+        	return matcher.matches() && !task.isComplete();
         }
         
         @Override
