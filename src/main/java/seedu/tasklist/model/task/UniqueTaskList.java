@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class UniqueTaskList implements Iterable<Task> {
 	
-	final Set<Calendar> calSet = new HashSet<Calendar>();
+	final HashSet<Calendar> calSet = new HashSet<Calendar>();
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -102,6 +102,9 @@ public class UniqueTaskList implements Iterable<Task> {
     
     public boolean checkClashingTime(Task toAdd) throws IllegalValueException{
     	boolean added = false;
+    	for(Task cal: internalList){
+    		calSet.add(cal.getDateTime().getBeginCal());
+    	}
     	if(toAdd!=null){
     		 added = calSet.add(toAdd.getDateTime().getBeginCal());
     	}

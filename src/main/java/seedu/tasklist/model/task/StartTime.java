@@ -21,11 +21,18 @@ public class StartTime implements Time{
      */
     public StartTime(String phone) throws IllegalValueException {
      //  assert phone != null;
+    	if(phone.equals("")){
+        	this.value = "";
+        }
+    	else{
         if (phone==null||!isValidTime(phone)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
-
+    	
         this.value = phone;
+    	}
+
+    	
     }
 
     /**

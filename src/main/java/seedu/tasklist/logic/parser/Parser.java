@@ -109,24 +109,19 @@ public class Parser {
         else {
         	String starttime = (taskMatcher.group("start")==null)?"":taskMatcher.group("start");
         	String endtime = (taskMatcher.group("end")==null)?"":taskMatcher.group("end");
-        	String[] startTimeDate = new String[2];
-        	String[] endTimeDate = new String[2];
-        	startTimeDate = starttime.split(" ");
-        	endTimeDate = endtime.split(" ");      	
-        	String finalStartDate = startTimeDate[1];
-        	String finalEndDate = endTimeDate[1];
-        	String finalEndTime = endTimeDate[0];
-        	String finalStartTime = startTimeDate[0];
-        	
         	
             try {
-            	 System.out.println("StartDate: "+finalStartDate+" Start time: "+finalStartTime+" End Date: "+finalEndDate+" End Time: "+finalEndTime);
+            	if(starttime.equals("")&&endtime.equals("")){
+            		return new AddCommand(taskMatcher.group("name").replace("\\", ""),
+            				taskMatcher.group("priority"),
+                            getTagsFromArgs(taskMatcher.group("tagArguments")));
+            	}
+         
+
                 return new AddCommand(
                         taskMatcher.group("name").replace("\\", ""),
-                        finalStartTime,
-                        finalStartDate,
-                        finalEndTime,
-                        finalEndDate,
+                        starttime,
+                        endtime,
                         taskMatcher.group("priority"),
                         getTagsFromArgs(taskMatcher.group("tagArguments"))
                 );

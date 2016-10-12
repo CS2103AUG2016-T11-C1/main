@@ -2,6 +2,7 @@ package seedu.tasklist.model.task;
 
 import java.util.Objects;
 
+import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.model.tag.UniqueTagList;
 
@@ -38,6 +39,19 @@ public class Task implements ReadOnlyTask{
         this.priority = priority;
         dateTime = new DateTime(startTime, startDate, endTime, endDate);
         this.uniqueID = currentID++;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isComplete = false;
+    }
+    
+    public Task(TaskDetails name, Priority priority, UniqueTagList tags) throws IllegalValueException{
+    	this.name = name;
+    	this.priority = priority;
+    	startTime = new StartTime("");
+    	startDate = new StartDate("");
+    	endTime = new EndTime("");
+    	endDate = new EndDate("");
+    	dateTime = new DateTime(startTime, startDate, endTime, endDate);
+    	this.uniqueID = currentID++;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isComplete = false;
     }

@@ -22,17 +22,22 @@ public class StartDate {
 	     */
 	    public StartDate(String startDate) throws IllegalValueException{
 	     //  assert phone != null;
+	    	cal = Calendar.getInstance();
+	    	if(!startDate.equals("")){
 	        if (startDate!=null&&!isValidStartDate(startDate)) {
 	            throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
 	        }
 	        
-	    	cal = Calendar.getInstance();
             String[] dateParameters = {"0", "0", "0"};
 	    	
-	    	if(startDate!=null){
+	    	if(startDate!=null&&!startDate.equals("")){
 	    	dateParameters = startDate.split("(/|-)");
 	    	cal.set(Integer.valueOf(dateParameters[2]), (Integer.valueOf(dateParameters[1])-1),Integer.valueOf(dateParameters[0]));
 	    	value = startDate;    	
+	    	}
+	    	}
+	    	else{
+	    		value = "";
 	    	}
 	    }
 

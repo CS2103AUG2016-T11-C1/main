@@ -13,7 +13,7 @@ public class EndDate {
 	    public static final String ENDDATE_VALIDATION_REGEX = "(([0-3][0-9]{1}+)(/|-)([0-1][0-9]{1}+)(/|-)([1-2][0-9][0-9][0-9]{1}+))";
 
 	    public final Calendar cal2;
-	    public String value = "na";
+	    public String value = "";
 	    /**
 	     * Validates given phone number.
 	     *
@@ -21,17 +21,23 @@ public class EndDate {
 	     */
 	    public EndDate(String endDate) throws IllegalValueException {
 	     //  assert phone != null;
+	    	cal2 = Calendar.getInstance();
+	    	if(!endDate.equals("")){
 	        if (endDate!=null&&!isValidEndDate(endDate)) {
 	            throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
 	        }
 	        
-	    	cal2 = Calendar.getInstance();
+
 	    	String[] dateParameters = {"0", "0", "0"};
 	    	
-	    	if(endDate!=null){
+	    	if(endDate!=null&&!endDate.equals("")){
 	    	dateParameters = endDate.split("(/|-)");
 	    	cal2.set(Integer.valueOf(dateParameters[2]), (Integer.valueOf(dateParameters[1])-1),Integer.valueOf(dateParameters[0]));	    	
 	        value = endDate;
+	    	}
+	    	}
+	    	else{
+	    		value = "";
 	    	}
 	    }
 

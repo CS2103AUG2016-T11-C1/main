@@ -12,8 +12,7 @@ public class EndTime implements Time{
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
     public static final String EMAIL_VALIDATION_REGEX = "([0])?[0-9]{1}+(pm|am)|([1])([0-1]){1}+(pm|am)|([0-1][0-9]:[0-5][0-9])|([2][0-3]:[0-5][0-9])";
-
-    public String value = "haha";
+    public String value;
 
     /**
      * Validates given email.
@@ -22,11 +21,17 @@ public class EndTime implements Time{
      */
     public EndTime(String email) throws IllegalValueException {
         //assert email != null;
+    	if(email.equals("")){
+        	this.value="";
+        }
+    	else{
         if (email==null||!isValidTime(email)) {
             throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
         }
-
+       
         this.value = email;
+    	}
+        
     }
 
     /**

@@ -30,17 +30,43 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String startTime, String startDate, String endTime, String endDate, String priority, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, String startTime, String endTime, String priority, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
+        String[] startTimeDate = new String[2];
+    	String[] endTimeDate = new String[2];
+    	startTimeDate = startTime.split(" ");
+    	endTimeDate = endTime.split(" ");   
+    	String finalStartTime = "";
+    	String finalStartDate = "";
+    	String finalEndTime= "";
+    	String finalEndDate= "";
+    	
+    	if(startTimeDate[0].length()<startTimeDate[1].length()){
+    	  finalStartTime = startTimeDate[0];
+    	  finalStartDate = startTimeDate[1];
+    	}
+    	else if(startTimeDate[0].length()>startTimeDate[1].length()){
+    		finalStartDate = startTimeDate[0];
+    		finalStartTime = startTimeDate[1];
+    	}
+    	if(endTimeDate[0].length()<endTimeDate[1].length()){
+        	 finalEndTime = endTimeDate[0];
+        	 finalEndDate = endTimeDate[1];
+        	}
+        	else if(endTimeDate[0].length()>endTimeDate[1].length()){
+               finalEndDate = endTimeDate[0];
+               finalEndTime = endTimeDate[1];
+        	}
+    
+           this.toAdd = new Task(
                 new TaskDetails(name),
-                new StartTime(startTime),
-                new StartDate(startDate),
-                new EndTime(endTime),
-                new EndDate(endDate),
+                new StartTime(finalStartTime),
+                new StartDate(finalStartDate),
+                new EndTime(finalEndTime),
+                new EndDate(finalEndDate),
                 new Priority(priority),
                 new UniqueTagList(tagSet)
         );
@@ -52,7 +78,14 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String name, String priority, Set<String> tags) throws IllegalValueException {
-        this(name, "", "", "", "", priority ,tags);
+    	final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+    	this.toAdd = new Task(
+				new TaskDetails(name),
+				new Priority(priority),
+                new UniqueTagList(tagSet));
     }
 
     @Override
