@@ -30,9 +30,16 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 	 */
 	public Task(TaskDetails taskDetails, StartTime startTime, EndTime endTime, Priority priority, UniqueTagList tags, String recurringFrequency) {
 		assert !CollectionUtil.isAnyNull(taskDetails, startTime, endTime, priority, tags, recurringFrequency);
+		
+        TimeDateValidation checkTimeDate = new TimeDateValidation(startTime, endTime);
+        StartTime finalstarttime = checkTimeDate.getStartTime();
+        EndTime finalendtime = checkTimeDate.getEndTime();
+        System.out.println("StartTime: "+finalstarttime.toCardString());
+		System.out.println("EndTime: "+finalendtime.toCardString());
+		
 		this.taskDetails = taskDetails;
-		this.startTime = startTime;
-		this.endTime = endTime;
+		this.startTime = finalstarttime;
+		this.endTime = finalendtime;
 		this.priority = priority;
 		this.uniqueID = currentID++;
 		this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list

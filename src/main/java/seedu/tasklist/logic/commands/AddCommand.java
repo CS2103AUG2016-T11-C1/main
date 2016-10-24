@@ -22,8 +22,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the to-do list.";
-
+ 
     private final Task toAdd;
+ 
 
     /**
      * Convenience constructor using raw values.
@@ -35,9 +36,10 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        
         this.toAdd = new Task(
                 new TaskDetails(name.replace("\\", "")),
-                new StartTime(startTime),
+                new StartTime(startTime), 
                 new EndTime(endTime),
                 new Priority(priority),
                 new UniqueTagList(tagSet),
