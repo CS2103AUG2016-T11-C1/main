@@ -16,7 +16,6 @@ public class TimeDateValidation {
 	 
 	private void notChronological(StartTime starttime, EndTime endtime) {
 		if(starttime.getAsCalendar().after(endtime.getAsCalendar())){
-			System.out.println("YEs out of place !!!!");
     		  tempCal = (Calendar) starttime.getAsCalendar().clone();
     		  startTime = new StartTime(endtime.getAsCalendar().getTimeInMillis());
     		  endTime = new EndTime(tempCal.getTimeInMillis());
