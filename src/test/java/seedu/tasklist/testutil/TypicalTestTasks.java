@@ -49,7 +49,6 @@ public class TypicalTestTasks {
             ab.addTask(new Task(task3));
             ab.addTask(new Task(task4));
             ab.addTask(new Task(task5));
-            ab.addTask(new Task(task6));
             ab.addTask(new Task(task7));
             ab.addTask(new Task(task10));
             ab.addTask(new Task(task11));
@@ -62,7 +61,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-    	TestTask[] result = new TestTask[]{task1, task2, task3, task4, task5, task6, task7, task10, task9, task11};
+    	TestTask[] result = new TestTask[]{task1, task2, task3, task4, task5, task7, task10, task9, task11};
     	Arrays.sort(result, (a,b)->{return a.compareTo(b);});
         return result;
     }

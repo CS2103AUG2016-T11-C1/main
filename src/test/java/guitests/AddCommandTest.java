@@ -16,14 +16,14 @@ public class AddCommandTest extends TaskListGuiTest {
 
     @Test
     public void add() {
-    	//Invalid Command not chronological date and time
-    	TestTask personToAdd = TypicalTestTasks.task12;
-        commandBox.runCommand(personToAdd.getAddCommand());
-        assertResultMessage(String.format(AddCommand.MESSAGE_NOT_CHRONO_TASK));
-        
       //add one person
         TestTask[] currentList = td.getTypicalTasks();
-        personToAdd = TypicalTestTasks.task8;
+        TestTask personToAdd = TypicalTestTasks.task8;
+        assertAddSuccess(personToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, personToAdd);
+        
+      //add another person
+        personToAdd = TypicalTestTasks.task6;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, personToAdd);
 
@@ -31,16 +31,16 @@ public class AddCommandTest extends TaskListGuiTest {
         personToAdd = TypicalTestTasks.task8;
         commandBox.runCommand(personToAdd.getAddCommand());
         assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS + AddCommand.MESSAGE_OVERLAP, personToAdd.toString()));
-        currentList = TestUtil.addTasksToList(currentList, personToAdd);
+     //   currentList = TestUtil.addTasksToList(currentList, personToAdd);
         TestTask[] overlappingList = new TestTask[0];
         overlappingList = TestUtil.addTasksToList(overlappingList, personToAdd);
         assertTrue(taskListPanel.isListMatching(overlappingList)); 
         
-        //add another person
-        personToAdd = TypicalTestTasks.task5;
-        currentList = TestUtil.addTasksToList(currentList, personToAdd);
-        assertAddSuccess(personToAdd, currentList);
-
+        
+      //Invalid Command not chronological date and time
+   	 personToAdd = TypicalTestTasks.task12;
+       commandBox.runCommand(personToAdd.getAddCommand());
+       assertResultMessage(String.format(AddCommand.MESSAGE_NOT_CHRONO_TASK));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -63,7 +63,7 @@ public class AddCommandTest extends TaskListGuiTest {
 
         //confirm the list now contains all previous persons plus the new person
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, personToAdd);
-       // System.out.println("Expected List length: "+expectedList.length);
+        System.out.println("Expected List length: "+expectedList.length);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
