@@ -82,7 +82,8 @@ public class PersonListPanelHandle extends GuiHandle {
      * @param persons A list of person in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... persons) throws IllegalArgumentException {
-    	if (persons.length + startPosition != getListView().getItems().size()) {
+    	//System.out.println("Check List View: "+getListView().getItems().size());
+    	if (persons.length + startPosition != (getListView().getItems().size()-1)) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " persons");
         }
@@ -100,7 +101,7 @@ public class PersonListPanelHandle extends GuiHandle {
 
 
     public PersonCardHandle navigateToPerson(String name) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getTaskDetails().toString().equals(name)).findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
