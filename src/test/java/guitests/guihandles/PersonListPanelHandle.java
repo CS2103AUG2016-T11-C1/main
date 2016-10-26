@@ -70,6 +70,7 @@ public class PersonListPanelHandle extends GuiHandle {
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
             if (!personsInList.get(startPosition + i).getTaskDetails().taskDetails.equals(persons[i].getTaskDetails().taskDetails)){
+            	System.out.println("In second block in this index: "+i);
                 return false;
             }
         }
@@ -82,9 +83,11 @@ public class PersonListPanelHandle extends GuiHandle {
      * @param persons A list of person in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... persons) throws IllegalArgumentException {
-    	if (persons.length + startPosition != getListView().getItems().size()) {
+    	int finalsize=getListView().getItems().size()-1;
+    	System.out.println("Check List View: "+finalsize);
+    	if (persons.length + startPosition != finalsize) {
             throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " persons");
+                    "Expected " + (getListView().getItems().size()-1) + " persons");
         }
         assertTrue(this.containsInOrder(startPosition, persons));
         for (int i = 0; i < persons.length; i++) {
@@ -100,7 +103,7 @@ public class PersonListPanelHandle extends GuiHandle {
 
 
     public PersonCardHandle navigateToPerson(String name) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getTaskDetails().toString().equals(name)).findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);

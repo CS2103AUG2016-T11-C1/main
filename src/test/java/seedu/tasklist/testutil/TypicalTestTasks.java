@@ -12,7 +12,7 @@ import seedu.tasklist.model.task.*;
  */
 public class TypicalTestTasks {
 
-    public static TestTask task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11;
+    public static TestTask task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12;
 
     public TypicalTestTasks() {
         try {
@@ -34,6 +34,7 @@ public class TypicalTestTasks {
             task9 = new TaskBuilder().withTaskDetails("Buy groceries").withStartTime("30 oct 6pm").withEndTime("").withUniqueID(9).withPriority("low").withRecurringFrequency("").build();
             task10 = new TaskBuilder().withTaskDetails("Study for EE2021").withStartTime("31 oct 6pm").withEndTime("").withUniqueID(10).withPriority("low").withRecurringFrequency("").build();
             task11 = new TaskBuilder().withTaskDetails("Work on CS2101 Project").withStartTime("14/11/2016 6pm").withEndTime("").withUniqueID(11).withPriority("low").withRecurringFrequency("").build();
+            task12 = new TaskBuilder().withTaskDetails("Work on EE2020").withStartTime("14/11/2016 6pm").withEndTime("13/11/2016 5pm").withUniqueID(11).withPriority("low").withRecurringFrequency("").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -48,10 +49,11 @@ public class TypicalTestTasks {
             ab.addTask(new Task(task3));
             ab.addTask(new Task(task4));
             ab.addTask(new Task(task5));
-            ab.addTask(new Task(task6));
             ab.addTask(new Task(task7));
             ab.addTask(new Task(task10));
             ab.addTask(new Task(task11));
+            ab.addTask(new Task(task12));
+            ab.addTask(new Task(task9));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "Some of the tasks could not be added!";
         }
@@ -59,7 +61,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-    	TestTask[] result = new TestTask[]{task1, task2, task3, task4, task5, task6, task7, task10, task11};
+    	TestTask[] result = new TestTask[]{task1, task2, task3, task4, task5, task7, task10, task9, task11};
     	Arrays.sort(result, (a,b)->{return a.compareTo(b);});
         return result;
     }
