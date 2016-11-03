@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.simple.parser.ParseException;
 
-import seedu.tasklist.commons.core.ConfigTest;
 import seedu.tasklist.storage.Storage;
 
 public class SetStorageCommand extends Command {
