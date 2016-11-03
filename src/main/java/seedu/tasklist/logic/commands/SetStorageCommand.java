@@ -1,5 +1,6 @@
 /* @@author A0135769N */
 package seedu.tasklist.logic.commands;
+import java.io.File;
 import java.io.IOException;
 import org.json.JSONException;
 import org.json.simple.parser.ParseException;
@@ -16,10 +17,10 @@ public class SetStorageCommand extends Command {
 
 	public static final String MESSAGE_SUCCESS = "Changed file path to: ";
 	public static final String MESSAGE_STORAGE_FAILURE = "File path not found. Please enter a valid file path.";
-    
+
 	protected Storage storage;
 	private static String filePath;
-	
+
 	public SetStorageCommand(String path){
 		filePath = path;
 
@@ -28,6 +29,13 @@ public class SetStorageCommand extends Command {
 	public CommandResult execute() throws IOException, JSONException, ParseException {
 		assert model != null;
 		model.changeFileStorage(filePath);
+		if(!isValidFilePath(filePath))
+			return new CommandResult(String.format(MESSAGE_STORAGE_FAILURE + filePath));
 		return new CommandResult(String.format(MESSAGE_SUCCESS + filePath));
+	}
+
+	public boolean isValidFilePath(String filepath){
+		File targetListFile = new File(filePath);
+		return filePath.equals("default")||targetListFile.exists()||targetListFile.isDirectory();
 	}
 }
